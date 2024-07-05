@@ -1,29 +1,32 @@
-
-class SigninModel{
-
-  String? username;
+class signinModel {
+  String? name;
   String? email;
   String? phone;
   String? password;
-  String? confirm;
-  
+  String? passwordConfirmation;
 
-  
-  
+  signinModel(
+      {this.name,
+      this.email,
+      this.phone,
+      this.password,
+      this.passwordConfirmation});
 
-  bool get isValidEmail => email != null && email!.isNotEmpty && email!.contains('@');
+  signinModel.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
+    password = json['password'];
+    passwordConfirmation = json['password_confirmation'];
+  }
 
-  bool get isValidPassword => password != null && password!.isNotEmpty;
-
-  bool get isVaildPhone => phone != null && phone!.isNotEmpty && phone!.length == 10;
-
-  bool get isVaildUsername => username != null && username!.isNotEmpty;
-
-  bool get isValidConfirm => confirm != null && confirm!.isNotEmpty && confirm == password;
-
-  bool get isValid => isVaildPhone & isValidEmail & isValidPassword & isVaildUsername & isValidConfirm;
-
-
-
-
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['email'] = email;
+    data['phone'] = phone;
+    data['password'] = password;
+    data['password_confirmation'] = passwordConfirmation;
+    return data;
+  }
 }

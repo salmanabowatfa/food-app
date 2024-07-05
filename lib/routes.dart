@@ -1,4 +1,4 @@
-import 'package:food_app/screens/authenticated_screen.dart';
+import 'package:food_app/screens/verification_screen.dart';
 import 'package:food_app/screens/home_screen.dart';
 import 'package:food_app/screens/login_screen.dart';
 import 'package:food_app/screens/signin_screen.dart';
@@ -10,9 +10,9 @@ class Routes {
   GetPage(name: '/', page: () => const SplashScreen(),),
     GetPage(name: '/login', page: () => LoginScreen()),
     GetPage(name: '/signin', page: () => SigninScreen(),transition: Transition.rightToLeftWithFade,),
-    GetPage(name: '/authentication', page: () => const AuthenticatedScreen(),transition: Transition.rightToLeftWithFade,),
+    GetPage(name: '/verification', page: () => const VerificationScreen(),transition: Transition.rightToLeftWithFade,),
 
-    GetPage(name: '/home', page: () => const HomeScreen())
+    GetPage(name: '/home', page: () =>  HomeScreen())
   ];
 }
 

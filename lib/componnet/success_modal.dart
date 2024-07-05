@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_app/componnet/bottom_sheet_header.dart';
 import 'package:food_app/componnet/custom_button.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class SuccessModalSheet extends StatelessWidget {
@@ -16,7 +15,7 @@ class SuccessModalSheet extends StatelessWidget {
       enableDrag: true,
       isDismissible: true,
       isScrollControlled: true,
-      backgroundColor: Color(0xfffffdfd),
+      backgroundColor: const Color(0xfffffdfd),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
       builder: (context) {
@@ -76,7 +75,7 @@ class SuccessModalSheet extends StatelessWidget {
                 btntextColor: const Color(0XFF035014),
                 onPressed: () {
                   Get.toNamed('/home');
-                  // Get.toNamed('/signin');
+                  
                 },),
                 const SizedBox(
                   height: 30,

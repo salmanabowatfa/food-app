@@ -1,5 +1,5 @@
- import 'package:flutter/material.dart';
- import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SplashScreenViewModel extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -22,4 +22,4 @@ class SplashScreenViewModel extends GetxController
     animation.addListener(() => update());
     animationController.forward();
   }
-    }
+}

@@ -1,11 +1,15 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:food_app/componnet/success_modal.dart';
+import 'package:food_app/componnet/wrong_dialog.dart';
+import 'package:food_app/services/crud.dart';
+import 'package:food_app/services/statusrequest.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class AuthenticatedScreen extends StatelessWidget {
-  const AuthenticatedScreen({super.key});
+class VerificationScreen extends StatelessWidget {
+  const VerificationScreen({super.key});
 
   get colors => null;
 
@@ -18,7 +22,6 @@ class AuthenticatedScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Align(
                   alignment: Alignment.topLeft,
@@ -28,10 +31,7 @@ class AuthenticatedScreen extends StatelessWidget {
                       color: Color(0xFFCECECE),
                     ),
                     onPressed: () {
-                      // Get.toNamed('/signin');
-                       Get.back();
-                      
-                      // print('object');
+                      Get.back();
                     },
                   ),
                 ),
@@ -95,40 +95,10 @@ class AuthenticatedScreen extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     enableActiveFill: true,
                     onCompleted: (v) {
-                       SuccessModalSheet.show(context);
-                      // showModalBottomSheet(
-                      //     context: context,
-                      //     builder: (context) => Center(
-                      //           child: Column(
-                      //             children: [
-                      //               Stack(children: [Image.asset('assets/image/Ellipse 1.png',height: 106,width: 106,),
-                      //               Positioned(top: 8,right: 8,child: Icon(Icons.check,color: Colors.greenAccent,))
-                      //               ]),
-                      //               // const GradientIcon(
-                      //               //   icon: Icons.check_circle_outline,
-                      //               //   gradient: LinearGradient(
-                      //               //     colors: [
-                      //               //       Color(0xffA3C5B0),
-                      //               //       Color(0xffB6E5B9)
-                      //               //     ],
-                      //               //     end: Alignment.topLeft,
-                      //               //     begin: Alignment.bottomRight,
-                      //               //   ),
-                      //               //   size: 106,
-                      //               // ),
-                      //               GradientText('Success!', style: const TextStyle(fontSize: 22,fontFamily: 'Cabin',fontWeight: FontWeight.w700),colors: const [
-                      //                 //Color(0xffA3C5B0),
-                      //                Color(0xffB6E5B9),
-                      //                Color.fromARGB(255, 7, 87, 9)
-                      //               ]),
-                                    
-                      //             ],
-                      //           ),
-                      //         ));
+                      checkVerficationCode(code: v, context: context);
                     },
                     onChanged: (value) {},
                     beforeTextPaste: (text) {
-                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
                       return true;
                     },
                     appContext: context,
@@ -169,5 +139,22 @@ class AuthenticatedScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void checkVerficationCode(
+    {required String code, required BuildContext context}) async {
+  Either<StatusRequest, Map<dynamic, dynamic>> callingApi =
+      await Crud.postData(linkurl: "/auth/verifyEemail", data: {"code": code});
+
+  if (callingApi.isRight()) {
+
+    //TODO:: save token
+    
+    SuccessModalSheet.show(context);
+
+  } else {
+    // ignore: use_build_context_synchronously
+    wrongDialog(context: context);
   }
 }

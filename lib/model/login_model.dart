@@ -1,18 +1,21 @@
 class LoginModel {
-  
   String? email;
   String? phone;
   String? password;
 
+  LoginModel({this.email, this.phone, this.password});
 
-  bool get isValidEmail  {
-    return email != null && email!.isNotEmpty && email!.contains("@");
+  LoginModel.fromJson(Map<String, dynamic> json) {
+    email = json['email'];
+    phone = json['phone'];
+    password = json['password'];
   }
-  
-  bool get isVaildPhone => phone != null && phone!.isNotEmpty && phone!.length == 10;
 
-  bool get isValidPassword => password != null && password!.isNotEmpty;
-
-  bool get isValid => isVaildPhone & isValidEmail & isValidPassword;
-
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['email'] = email;
+    data['phone'] = phone;
+    data['password'] = password;
+    return data;
+  }
 }

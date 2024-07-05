@@ -13,17 +13,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 2),() {
+    Timer(const Duration(seconds: 2,), () {
       Get.toNamed('/login');
     });
-    // TODO: implement initState
+
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    // Get.find();
-    // SplashScreenViewModel splashScreenViewModel =
-    //     Get.put(SplashScreenViewModel());
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.sizeOf(context).height,

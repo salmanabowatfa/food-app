@@ -57,8 +57,6 @@ void wrongDialog({required BuildContext context}) {
                       btntext: 'Try Again',
                       btntextColor: Colors.white,
                       onPressed: () {},
-                      // height: 28,
-                      // width: 113,
                     ),
                   ),
                   const Spacer(),

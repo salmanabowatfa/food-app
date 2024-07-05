@@ -24,13 +24,12 @@ class LoginScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Obx(() {
-                controller.loginModel.value;
+                controller.email.value;
                 return CustomeTextField(
                   hint: 'email',
                   onChanged: controller.changeEmail,
-                  validator: (_) => controller.loginModel.value.isValidEmail
-                      ? null
-                      : "Invalid email",
+                  validator: (_) =>
+                      controller.isValidEmail ? null : "Invalid email",
                   // controller: TextEditingController(),
                   suffixIcon: const Icon(
                     Icons.edit_square,
@@ -42,27 +41,31 @@ class LoginScreen extends StatelessWidget {
                 height: 21,
               ),
               Obx(() {
-                controller.loginModel.value;
+                controller.phone.value;
                 return CustomeTextField(
                   hint: 'Mobile Number',
-                  onChanged: controller.changePhone,
-                  validator: (_) => controller.loginModel.value.isVaildPhone
-                      ? null
-                      : "Invalid phone",
+                  onChanged:(s){
+                  controller.changePhone(s);
+
+                  }, 
+                  validator: (_) =>
+                      controller.isVaildPhone ? null : "Invalid phone",
                 );
               }),
               const SizedBox(
                 height: 21,
               ),
               Obx(() {
-                controller.loginModel.value;
+                controller.password.value;
                 return CustomeTextField(
                   obscureText: controller.isPasswordHidden.value,
                   hint: 'password',
-                  onChanged: controller.changePassword,
-                  validator: (_) => controller.loginModel.value.isValidPassword
-                      ? null
-                      : "Invalid password",
+                  onChanged:(s){
+                  controller.changePassword(s);
+
+                  }, 
+                  validator: (_) =>
+                      controller.isValidPassword ? null : "Invalid password",
                   suffixIcon: IconButton(
                     icon: Icon(
                       controller.isPasswordHidden.value
@@ -80,15 +83,21 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 21,
               ),
-              GetBuilder<LoginController>(builder: (c) {
+              Obx( () {
                 return CustomButton(
                     btnborderColor: const Color(0xff97BFA0),
                     btnbackColor: const Color(0XFFB6E5B9),
                     btntext: 'Login',
                     btntextColor: const Color(0XFF035014),
-                    onPressed: c.loginModel.value.isValid
+                    onPressed: controller.isFullValid
                         ? () {
-                            Get.toNamed('/home');
+                          
+                            controller.login(
+                                phone: controller.phone.value,
+                                email: controller.email.value,
+                                password: controller.password.value,
+                                context: context);
+                            // Get.toNamed('/home');
                           }
                         : null);
               }),

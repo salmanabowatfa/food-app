@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BottomSheetHeader extends StatelessWidget {
-  const BottomSheetHeader({Key? key, this.color =const Color(0xffD9D9D9)})
-      : super(key: key);
+  const BottomSheetHeader({super.key, this.color =const Color(0xffD9D9D9)});
 
   final Color color;
 
@@ -12,7 +11,7 @@ class BottomSheetHeader extends StatelessWidget {
       child: Container(
         width: 38.0,
         height: 5.0,
-        margin: EdgeInsets.symmetric(vertical: 15.0),
+        margin: const EdgeInsets.symmetric(vertical: 15.0),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(4.0),
